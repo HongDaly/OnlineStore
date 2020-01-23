@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rcCategory;
     private CategoryAdapter categoryAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Category> categories = new ArrayList<>();
 
 
@@ -38,22 +37,18 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         rcCategory = root.findViewById(R.id.hf_rc_category);
-        layoutManager = new LinearLayoutManager(getContext());
 
         FirebaseHelper.getCategories().addOnSuccessListener(
                 new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if(queryDocumentSnapshots != null){
-                            Log.d("Suff", "categoryAdapter: "+queryDocumentSnapshots.size());
                             for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                                 Category category = documentSnapshot.toObject(Category.class);
                                 categories.add(category);
                             }
                             categoryAdapter = new CategoryAdapter(getContext(),categories);
                             rcCategory.setAdapter(categoryAdapter);
-                            rcCategory.setLayoutManager(layoutManager);
-                            Log.d("Suff", "categoryAdapter: "+categories.size());
                         }
                         Log.d("Error", "onSuccess: ");
                     }

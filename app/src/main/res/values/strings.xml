@@ -15,4 +15,14 @@
     <string name="title">Title</string>
     <string name="price">Price</string>
     <string name="product">Product</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
+    <string name="mgs_login_create">Do not have an account ? Swipe left to</string>
+    <string name="msg_login_create_account_text">create a new account.</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="register">Register</string>
+    <string name="our_policy_and_term">our Policy and Term.</string>
+    <string name="by_create_account_you_agree_with">By create account you agree with</string>
 </resources>
