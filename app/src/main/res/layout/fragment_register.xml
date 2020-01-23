@@ -60,9 +60,10 @@
                     android:hint="@string/email">
 
                     <EditText
+                        android:background="@drawable/edit_text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background=""
+
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:text="" />
@@ -88,9 +89,10 @@
                     android:hint="@string/full_name">
 
                     <EditText
+                        android:background="@drawable/edit_text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background=""
+
                         android:inputType="text"
                         android:padding="5dp"
                         android:text="" />
@@ -115,9 +117,10 @@
                     android:hint="@string/password">
 
                     <EditText
+                        android:background="@drawable/edit_text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background=""
+
                         android:inputType="textPassword"
                         android:padding="5dp" />
                 </com.google.android.material.textfield.TextInputLayout>

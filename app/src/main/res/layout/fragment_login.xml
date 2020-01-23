@@ -52,8 +52,7 @@
                     android:hint="@string/email"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:text=""
-                        android:background=""
+                        android:background="@drawable/edit_text_style"
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:layout_width="match_parent"
@@ -76,7 +75,7 @@
                     android:hint="@string/password"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:background=""
+                        android:background="@drawable/edit_text_style"
                         android:padding="5dp"
                         android:inputType="textPassword"
                         android:layout_width="match_parent"
