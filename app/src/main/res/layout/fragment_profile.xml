@@ -6,6 +6,7 @@
     tools:context=".ui.profile.ProfileFragment">
 
     <RelativeLayout
+        android:id="@+id/fp_rl_none_user"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,5 +20,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="invisible"
+        android:id="@+id/fp_rl_has_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/fp_btn_user_logout"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_style"
+            android:text="@string/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 </FrameLayout>

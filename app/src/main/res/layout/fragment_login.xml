@@ -52,6 +52,7 @@
                     android:hint="@string/email"
                     android:layout_height="wrap_content">
                     <EditText
+                        android:id="@+id/fl_edt_email"
                         android:background="@drawable/edit_text_style"
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
@@ -75,6 +76,7 @@
                     android:hint="@string/password"
                     android:layout_height="wrap_content">
                     <EditText
+                        android:id="@+id/fl_edt_password"
                         android:background="@drawable/edit_text_style"
                         android:padding="5dp"
                         android:inputType="textPassword"
@@ -87,11 +89,18 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/fl_btn_login"
         android:textStyle="bold"
         android:textColor="@color/colorWhite"
         android:background="@drawable/button_style"
         android:layout_marginTop="50dp"
         android:text="@string/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:id="@+id/fl_pb_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
