@@ -25,4 +25,5 @@
     <string name="register">Register</string>
     <string name="our_policy_and_term">our Policy and Term.</string>
     <string name="by_create_account_you_agree_with">By create account you agree with</string>
+    <string name="login_register">Login/Register</string>
 </resources>

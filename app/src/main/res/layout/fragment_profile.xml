@@ -5,10 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/fp_btn_user_auth"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_style"
+            android:text="@string/login_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
+    </RelativeLayout>
 </FrameLayout>
