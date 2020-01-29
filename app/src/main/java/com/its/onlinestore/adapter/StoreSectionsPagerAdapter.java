@@ -13,6 +13,8 @@ import com.its.onlinestore.ui.store.contact.StoreContactFragment;
 import com.its.onlinestore.ui.store.home.StoreHomeFragment;
 import com.its.onlinestore.ui.store.product.ProductFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 /**
@@ -38,6 +40,7 @@ public class StoreSectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
