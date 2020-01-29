@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,33 +8,428 @@
 
     <RelativeLayout
         android:id="@+id/fp_rl_none_user"
-        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/fp_btn_user_auth"
-            android:textStyle="bold"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:visibility="invisible">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_centerInParent="true"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/button_style"
-            android:text="@string/login_register"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <TextView
+                android:gravity="center"
+                android:text="@string/become_one_of_our_seller_for_free"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:text="@string/by_click_create_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/fp_btn_user_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:text="@string/login_register"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:visibility="invisible"
+
         android:id="@+id/fp_rl_has_user"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/fp_btn_user_logout"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/button_style"
-            android:text="@string/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorWhiteSmoke"
+        android:visibility="visible">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/profile"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_user" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/fp_tv_head_full_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/profile"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fp_tv_head_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/simple_email" />
+
+                        <TextView
+                            android:id="@+id/fp_tv_head_edit_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/button_style_circle"
+                            android:gravity="center"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/edit_profile"
+                            android:textAllCaps="true"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="start"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_profile" />
+
+                                    <TextView
+                                        android:id="@+id/fp_tv_full_name"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/profile" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="end"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_more_small"
+                                        android:tint="@color/colorPrimaryDark" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="55dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:background="@color/colorGrayLight"/>
+
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="start"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_mail" />
+
+                                    <TextView
+                                        android:id="@+id/fp_tv_email"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/simple_email" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="end"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_more_small"
+                                        android:tint="@color/colorPrimaryDark" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="55dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:background="@color/colorGrayLight"/>
+
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="start"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="10dp"
+                                        android:src="@drawable/ic_phone" />
+
+                                    <TextView
+                                        android:id="@+id/fp_tv_phone_number"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/phone_number" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="end"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_more_small"
+                                        android:tint="@color/colorPrimaryDark" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="55dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:background="@color/colorGrayLight"/>
+
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="start"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_password" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/change_password" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="end"
+                                        android:layout_weight="1"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_more_small"
+                                        android:tint="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="40dp"
+                            app:cardElevation="1dp"
+                            app:cardCornerRadius="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/fp_ll_store"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:layout_gravity="start"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_store"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:gravity="center_vertical"
+                                        android:text="@string/store"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="5"
+                                        android:layout_height="match_parent"/>
+                                    <ImageView
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:tint="@color/colorPrimaryDark"
+                                        android:src="@drawable/ic_more_small"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                </LinearLayout>
+                                <View
+                                    android:layout_marginStart="55dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorGrayLight" >
+                                </View>
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:layout_gravity="start"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_product"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:gravity="center_vertical"
+                                        android:text="@string/product"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="5"
+                                        android:layout_height="match_parent"/>
+                                    <ImageView
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:tint="@color/colorPrimaryDark"
+                                        android:src="@drawable/ic_more_small"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                </LinearLayout>
+                                <View
+                                    android:layout_marginStart="55dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorGrayLight" >
+                                </View>
+                                <LinearLayout
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:layout_gravity="start"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:src="@drawable/ic_contact"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:gravity="center_vertical"
+                                        android:text="@string/contact"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="5"
+                                        android:layout_height="match_parent"/>
+                                    <ImageView
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/profile"
+                                        android:padding="15dp"
+                                        android:tint="@color/colorPrimaryDark"
+                                        android:src="@drawable/ic_more_small"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="50dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="52dp"
+                            android:id="@+id/fp_btn_user_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_style"
+                            android:text="@string/logout"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

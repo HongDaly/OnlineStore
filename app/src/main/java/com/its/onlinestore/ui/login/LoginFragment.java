@@ -66,6 +66,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             pbLoading.setVisibility(View.VISIBLE);
             if(email.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(getContext(),"Please input information",Toast.LENGTH_LONG).show();
+                pbLoading.setVisibility(View.INVISIBLE);
             }else{
                 FirebaseHelper.login(email,pass)
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {

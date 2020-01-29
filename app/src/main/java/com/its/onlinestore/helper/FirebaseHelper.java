@@ -1,10 +1,10 @@
 package com.its.onlinestore.helper;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -12,7 +12,7 @@ import com.its.onlinestore.model.User;
 
 public class FirebaseHelper {
 
-    private static FirebaseFirestore database = FirebaseFirestore.getInstance();
+    public static FirebaseFirestore database = FirebaseFirestore.getInstance();
     public static FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public static Task<QuerySnapshot> getCategories(){
@@ -37,6 +37,8 @@ public class FirebaseHelper {
     }
 
 
-
+    public static Task<DocumentSnapshot> getUserById(String id){
+        return database.collection("users").document(id).get();
+    }
 
 }
