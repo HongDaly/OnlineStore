@@ -13,14 +13,42 @@
       android:layout_height="wrap_content">
       <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-          <androidx.recyclerview.widget.RecyclerView
-              android:visibility="invisible"
-              android:id="@+id/app_rv_image_gallery"
+          android:layout_height="200dp">
+          <LinearLayout
+              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="200dp"
-              app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-              app:spanCount="2" />
+              android:layout_height="match_parent">
+              <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="100dp">
+                  <ImageView
+                      android:id="@+id/app_image_1"
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"/>
+                  <ImageView
+                      android:id="@+id/app_image_2"
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"/>
+              </LinearLayout>
+              <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="100dp">
+                  <ImageView
+                      android:id="@+id/app_image_3"
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"/>
+                  <ImageView
+                      android:id="@+id/app_image_4"
+                      android:layout_weight="1"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"/>
+              </LinearLayout>
+          </LinearLayout>
           <ImageView
               android:scaleType="centerCrop"
               android:id="@+id/app_iv_pick_image"
@@ -121,6 +149,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
           <LinearLayout
+              android:id="@+id/app_ll_choose_category"
               android:clickable="true"
               android:focusable="true"
               android:background="?attr/selectableItemBackground"
@@ -129,6 +158,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
               <com.google.android.material.chip.ChipGroup
+                  android:id="@+id/app_cg_categories"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
               </com.google.android.material.chip.ChipGroup>
