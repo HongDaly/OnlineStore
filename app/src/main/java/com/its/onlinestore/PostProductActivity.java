@@ -1,5 +1,6 @@
 package com.its.onlinestore;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,23 +11,30 @@ import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.UploadTask;
 import com.its.onlinestore.helper.Constant;
 import com.its.onlinestore.helper.FirebaseHelper;
 import com.its.onlinestore.helper.PermissionControllerHelper;
 import com.its.onlinestore.model.Category;
+import com.its.onlinestore.model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +46,15 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
     private ImageView[] imageViews = new ImageView[4];
     private LinearLayout llChooseCategory;
     private ChipGroup cgCategories;
+
+    private EditText edtProductTitle;
+    private EditText edtProductPrice;
+    private EditText edtProductDiscount;
+    private EditText edtProductDescription;
+    private EditText edtProductTag;
+    private Button btnPost;
+
+    private Product product = new Product();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +68,17 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
         imageViews[3] = findViewById(R.id.app_image_4);
         cgCategories = findViewById(R.id.app_cg_categories);
 
+        edtProductTitle = findViewById(R.id.app_edt_product_title);
+        edtProductPrice = findViewById(R.id.app_edt_product_price);
+        edtProductDiscount = findViewById(R.id.app_edt_product_discount);
+        edtProductDescription = findViewById(R.id.app_edt_product_description);
+        edtProductTag = findViewById(R.id.app_edt_tag);
+        btnPost = findViewById(R.id.app_btn_post);
+
 
         llChooseCategory = findViewById(R.id.app_ll_choose_category);
 
-
+        btnPost.setOnClickListener(this);
         ivImagePicker.setOnClickListener(this);
         llChooseCategory.setOnClickListener(this);
     }
@@ -75,6 +99,30 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
         }else if(id == llChooseCategory.getId()){
 //            Choose category
             chooseCategory();
+        }else if (id == btnPost.getId()){
+
+//
+//Upload Image to Firebase Storage
+            for(int i = 0 ; i < imageViews.length;i++){
+                Uri uri = (Uri) imageViews[i].getTag();
+                if(uri != null){
+                    FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if(task.isSuccessful()){
+                                Uri downloadUri = task.getResult();
+                                Log.d("image",downloadUri.toString());
+                            }
+                        }
+                    });
+                }
+            }
+
+//            product.setTitle(edtProductTitle.getText().toString());
+//            product.setDescription(edtProductDescription.getText().toString());
+//            product.setDiscount(Float.valueOf(edtProductDiscount.getText().toString()));
+//            product.setPrice(Float.valueOf(edtProductPrice.getText().toString()));
+
         }
     }
 
@@ -104,6 +152,7 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
                             try {
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),clipData.getItemAt(i).getUri());
                                 imageViews[i].setImageBitmap(bitmap);
+                                imageViews[i].setTag(clipData.getItemAt(i).getUri());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

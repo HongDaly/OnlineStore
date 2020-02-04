@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             rlHasUser.setVisibility(View.INVISIBLE);
         }
     }
-
+    
     private void initUserProfileUI(){
         FirebaseHelper.getUserById(FirebaseHelper.getCurrentUser().getUid())
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

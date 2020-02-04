@@ -29,6 +29,47 @@ public class Product {
     public Product() {
     }
 
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public void setFeature_images(List<String> feature_images) {
+        this.feature_images = feature_images;
+    }
+
+    public void setCreated_at(Long created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setDiscount(Float discount) {
+        this.discount = discount;
+    }
+
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
+
     public String getId() {
         return id;
     }

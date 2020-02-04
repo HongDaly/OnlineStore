@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="20dp"
     tools:context=".PostProductActivity">
-
-  <LinearLayout
+    <LinearLayout
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
@@ -83,6 +82,7 @@
                   android:hint="@string/title">
 
                   <EditText
+                      android:id="@+id/app_edt_product_title"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
@@ -96,6 +96,7 @@
                   android:hint="@string/price">
 
                   <EditText
+                      android:id="@+id/app_edt_product_price"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
@@ -110,7 +111,7 @@
                   android:hint="@string/discount">
 
                   <EditText
-
+                        android:id="@+id/app_edt_product_discount"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_margin="5dp"
@@ -123,6 +124,7 @@
                   android:hint="@string/description">
 
                   <EditText
+                      android:id="@+id/app_edt_product_description"
                       android:overScrollMode="always"
                       android:scrollbarStyle="insideInset"
                       android:scrollbars="vertical"
@@ -163,6 +165,7 @@
                   android:layout_height="wrap_content">
               </com.google.android.material.chip.ChipGroup>
               <TextView
+                  android:layout_marginTop="10dp"
                   android:drawableEnd="@drawable/ic_more_small"
                   android:text="@string/choose_categories"
                   android:layout_width="match_parent"
@@ -185,14 +188,15 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-              <com.google.android.material.chip.ChipGroup
-                  android:padding="5dp"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
-              </com.google.android.material.chip.ChipGroup>
               <EditText
+                  android:id="@+id/app_edt_tag"
                   android:layout_margin="5dp"
                   android:hint="@string/enter_tag"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"/>
+              <Button
+                  android:id="@+id/app_btn_post"
+                  android:text="Post"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"/>
           </LinearLayout>

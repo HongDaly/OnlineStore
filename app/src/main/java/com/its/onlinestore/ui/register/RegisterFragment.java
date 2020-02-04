@@ -69,7 +69,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getContext(),"Please input information",Toast.LENGTH_LONG).show();
 
             }else {
-                final User user = new User(
+                final User user =
+                        new User(
                         "0",
                         edtFullname.getText().toString() ,
                         edtEmail.getText().toString(),
