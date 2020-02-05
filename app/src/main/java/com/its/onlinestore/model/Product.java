@@ -11,7 +11,7 @@ public class Product {
     private String description;
     private List<String> tags;
     private List<String> categories;
-    private List<String> feature_images = new ArrayList<>();
+    private List<String> feature_images;
     private Long created_at;
     private Float discount;
     private int hit;
@@ -120,11 +120,4 @@ public class Product {
         return hit;
     }
 
-
-    public void  clearFeatureImage(){
-        this.feature_images.clear();
-    }
-    public void addImageUrl(String url){
-        feature_images.add(url);
-    }
 }

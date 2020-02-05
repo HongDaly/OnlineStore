@@ -59,7 +59,6 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
 
     private Product product = new Product();
 
-    private List<String> categories = new ArrayList<>();
     private List<String> tagsList = new ArrayList<>();
 
 
@@ -136,12 +135,12 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
             }else
             {
                 dialog.show();
-                uploadImages();
+                product.setFeature_images( uploadImages());
                 product.setTitle(edtProductTitle.getText().toString());
                 product.setDescription(edtProductDescription.getText().toString());
                 product.setDiscount(Float.valueOf(edtProductDiscount.getText().toString()));
                 product.setPrice(Float.valueOf(edtProductPrice.getText().toString()));
-                product.setCategories(categories);
+                product.setCategories(getCategories());
                 String tag = edtProductTag.getText().toString();
                 String[] tags = tag.split(",");
                 tagsList.addAll(Arrays.asList(tags));
@@ -160,16 +159,23 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
                         if(dialog.isShowing()) dialog.dismiss();
                         Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
                     }
-                })
-                ;
+                });
 //              product
             }
         }
     }
+    private List<String> getCategories(){
+        List<String> categories = new ArrayList<>();
+        for (int i = 0 ; i< cgCategories.getChildCount() ;i++){
+            Chip chip = (Chip) cgCategories.getChildAt(i);
+            categories.add(chip.getText().toString());
+        }
+        return categories;
+    }
 
-    private void uploadImages(){
-        product.clearFeatureImage();
-        for (ImageView imageView : imageViews) {
+    private List<String> uploadImages(){
+        List<String> downloadUrls = new ArrayList<>();
+        for (final ImageView imageView : imageViews) {
             final Uri uri = (Uri) imageView.getTag();
             if (uri != null) {
                 FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -178,13 +184,17 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
                             if (downloadUri != null) {
-                                product.addImageUrl(downloadUri.toString());
+                                imageView.setTag(1010,downloadUri.toString());
                             }
                         }
                     }
                 });
             }
         }
+        for(ImageView imageView : imageViews){
+            downloadUrls.add(imageView.getTag(1010).toString());
+        }
+        return downloadUrls;
     }
 
     private void openGallery(){
@@ -314,7 +324,6 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
     }
     private void initCategoryToChipGroup(ArrayList<String> categories){
         for (String cate : categories){
-            categories.add(cate);
             Chip chip = new Chip(this);
             chip.setText(cate);
             cgCategories.addView(chip);
