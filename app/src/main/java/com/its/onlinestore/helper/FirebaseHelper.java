@@ -17,6 +17,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.its.onlinestore.model.Product;
 import com.its.onlinestore.model.User;
 
 public class FirebaseHelper {
@@ -66,5 +67,15 @@ public class FirebaseHelper {
                 return reference.getDownloadUrl();
             }
         });
+    }
+
+
+//
+    public static Task<Void> addProduct(Product product){
+        String userId = getCurrentUser().getUid();
+        product.setUserId(userId);
+        String id = database.collection("product").document().getId();
+        product.setId(id);
+        return database.collection("product").document(id).set(product);
     }
 }

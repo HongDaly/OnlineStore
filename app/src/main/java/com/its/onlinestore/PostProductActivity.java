@@ -20,9 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
@@ -38,6 +40,7 @@ import com.its.onlinestore.model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PostProductActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,6 +58,15 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
     private Button btnPost;
 
     private Product product = new Product();
+
+    private List<String> categories = new ArrayList<>();
+    private List<String> tagsList = new ArrayList<>();
+
+
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +90,20 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
 
         llChooseCategory = findViewById(R.id.app_ll_choose_category);
 
+        initLoading();
+
+
         btnPost.setOnClickListener(this);
         ivImagePicker.setOnClickListener(this);
         llChooseCategory.setOnClickListener(this);
+    }
+
+    private void initLoading(){
+        builder = new AlertDialog.Builder(this);
+        ProgressBar progressBar = new ProgressBar(this);
+        builder.setView(progressBar);
+        builder.setTitle("Loading");
+        dialog = builder.create();
     }
 
     @Override
@@ -102,27 +125,65 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
         }else if (id == btnPost.getId()){
 
 //
-//Upload Image to Firebase Storage
-            for(int i = 0 ; i < imageViews.length;i++){
-                Uri uri = (Uri) imageViews[i].getTag();
-                if(uri != null){
-                    FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if(task.isSuccessful()){
-                                Uri downloadUri = task.getResult();
-                                Log.d("image",downloadUri.toString());
+            //Upload Image to Firebase Storage
+            if(edtProductTitle.getText().toString().isEmpty()
+                || edtProductPrice.getText().toString().isEmpty()
+                    || edtProductDescription.getText().toString().isEmpty()
+                    ||edtProductDiscount.getText().toString().isEmpty()
+                    || edtProductTag.getText().toString().isEmpty()
+            ){
+                Toast.makeText(getApplicationContext(),"Please input product info! Thank you",Toast.LENGTH_LONG).show();
+            }else
+            {
+                dialog.show();
+                uploadImages();
+                product.setTitle(edtProductTitle.getText().toString());
+                product.setDescription(edtProductDescription.getText().toString());
+                product.setDiscount(Float.valueOf(edtProductDiscount.getText().toString()));
+                product.setPrice(Float.valueOf(edtProductPrice.getText().toString()));
+                product.setCategories(categories);
+                String tag = edtProductTag.getText().toString();
+                String[] tags = tag.split(",");
+                tagsList.addAll(Arrays.asList(tags));
+                product.setTags(tagsList);
+
+
+                FirebaseHelper.addProduct(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        if(dialog.isShowing()) dialog.dismiss();
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if(dialog.isShowing()) dialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+                    }
+                })
+                ;
+//              product
+            }
+        }
+    }
+
+    private void uploadImages(){
+        product.clearFeatureImage();
+        for (ImageView imageView : imageViews) {
+            final Uri uri = (Uri) imageView.getTag();
+            if (uri != null) {
+                FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            if (downloadUri != null) {
+                                product.addImageUrl(downloadUri.toString());
                             }
                         }
-                    });
-                }
+                    }
+                });
             }
-
-//            product.setTitle(edtProductTitle.getText().toString());
-//            product.setDescription(edtProductDescription.getText().toString());
-//            product.setDiscount(Float.valueOf(edtProductDiscount.getText().toString()));
-//            product.setPrice(Float.valueOf(edtProductPrice.getText().toString()));
-
         }
     }
 
@@ -253,6 +314,7 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
     }
     private void initCategoryToChipGroup(ArrayList<String> categories){
         for (String cate : categories){
+            categories.add(cate);
             Chip chip = new Chip(this);
             chip.setText(cate);
             cgCategories.addView(chip);
