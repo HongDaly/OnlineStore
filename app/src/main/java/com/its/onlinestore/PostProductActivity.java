@@ -135,7 +135,6 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
             }else
             {
                 dialog.show();
-                product.setFeature_images( uploadImages());
                 product.setTitle(edtProductTitle.getText().toString());
                 product.setDescription(edtProductDescription.getText().toString());
                 product.setDiscount(Float.valueOf(edtProductDiscount.getText().toString()));
@@ -145,9 +144,7 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
                 String[] tags = tag.split(",");
                 tagsList.addAll(Arrays.asList(tags));
                 product.setTags(tagsList);
-
-
-                FirebaseHelper.addProduct(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseHelper.addProduct(product,imageViews).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         if(dialog.isShowing()) dialog.dismiss();
@@ -173,29 +170,6 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
         return categories;
     }
 
-    private List<String> uploadImages(){
-        List<String> downloadUrls = new ArrayList<>();
-        for (final ImageView imageView : imageViews) {
-            final Uri uri = (Uri) imageView.getTag();
-            if (uri != null) {
-                FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            if (downloadUri != null) {
-                                imageView.setTag(1010,downloadUri.toString());
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        for(ImageView imageView : imageViews){
-            downloadUrls.add(imageView.getTag(1010).toString());
-        }
-        return downloadUrls;
-    }
 
     private void openGallery(){
         Intent intent = new Intent();

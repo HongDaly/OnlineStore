@@ -11,20 +11,18 @@ public class Product {
     private String description;
     private List<String> tags;
     private List<String> categories;
-    private List<String> feature_images;
     private Long created_at;
     private Float discount;
     private int hit;
     private String userId;
 
 
-    public Product(String title, Float price, String description, List<String> tags, List<String> categories, List<String> feature_images, Float discount,String userId) {
+    public Product(String title, Float price, String description, List<String> tags, List<String> categories,  Float discount,String userId) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.tags = tags;
         this.categories = categories;
-        this.feature_images = feature_images;
         this.discount = discount;
         this.userId = userId;
     }
@@ -64,9 +62,6 @@ public class Product {
         this.categories = categories;
     }
 
-    public void setFeature_images(List<String> feature_images) {
-        this.feature_images = feature_images;
-    }
 
     public void setCreated_at(Long created_at) {
         this.created_at = created_at;
@@ -102,10 +97,6 @@ public class Product {
 
     public List<String> getCategories() {
         return categories;
-    }
-
-    public List<String> getFeature_images() {
-        return feature_images;
     }
 
     public Long getCreated_at() {

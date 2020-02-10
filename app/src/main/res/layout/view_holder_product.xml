@@ -10,18 +10,22 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
        <ImageView
+           android:src="@drawable/ic_default_product_image"
+           android:id="@+id/vhp_iv_image"
            android:padding="5dp"
            android:scaleType="centerCrop"
            android:layout_width="match_parent"
            android:layout_height="120dp"
            android:contentDescription="@string/product" />
        <TextView
+           android:id="@+id/vhp_tv_title"
            android:maxLines="1"
            android:padding="5dp"
            android:text="@string/title"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"/>
        <TextView
+           android:id="@+id/vhp_tv_price"
            android:maxLines="1"
            android:padding="5dp"
            android:textStyle="bold"

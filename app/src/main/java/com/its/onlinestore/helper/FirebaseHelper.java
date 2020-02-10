@@ -1,12 +1,15 @@
 package com.its.onlinestore.helper;
 
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,8 +20,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.its.onlinestore.R;
 import com.its.onlinestore.model.Product;
 import com.its.onlinestore.model.User;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FirebaseHelper {
 
@@ -52,7 +60,7 @@ public class FirebaseHelper {
         return database.collection("users").document(id).get();
     }
 
-    public static Task<Uri> uploadImage(Uri uri){
+    private static Task<Uri> uploadImage(Uri uri){
         String name = String.valueOf(System.currentTimeMillis());
         String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
         final StorageReference reference =  storage.getReference("product/"+name+"."+ext);
@@ -71,11 +79,44 @@ public class FirebaseHelper {
 
 
 //
-    public static Task<Void> addProduct(Product product){
+    public static Task<Void> addProduct(Product product, ImageView[] images){
         String userId = getCurrentUser().getUid();
         product.setUserId(userId);
-        String id = database.collection("product").document().getId();
+        final String id = database.collection("product").document().getId();
         product.setId(id);
+        for (final ImageView image : images) {
+            final Uri uri = (Uri) image.getTag();
+            if (uri != null) {
+                FirebaseHelper.uploadImage(uri).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            if (downloadUri != null) {
+                                Map<String, String> docData = new HashMap<>();
+                                docData.put("image_url",downloadUri.toString());
+                                docData.put("product_id",id);
+                                database.collection("feature_image")
+                                        .add(docData);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        Long create_at = System.currentTimeMillis();
+        product.setCreated_at(create_at);
         return database.collection("product").document(id).set(product);
+    }
+
+
+
+//
+    public static Task<QuerySnapshot> getProduct(){
+        return database.collection("product").get();
+    }
+//
+    public static Task<QuerySnapshot> getProductImages(String productId){
+        return database.collection("feature_image").whereEqualTo("product_id",productId).get();
     }
 }

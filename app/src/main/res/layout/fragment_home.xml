@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hf_rc_category"
+            android:id="@+id/fh_rc_category"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -38,6 +38,7 @@
         </androidx.viewpager.widget.ViewPager>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fh_rc_product_list"
             android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
