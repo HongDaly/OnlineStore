@@ -3,8 +3,8 @@
     package="com.its.onlinestore">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +15,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:theme="@style/AppTheme.NoActionBar"
-            android:name=".PostProductActivity">
-        </activity>
+            android:name=".ProductInfoActivity"></activity>
+        <activity
+            android:name=".PostProductActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".StoreActivity"
             android:label="@string/title_activity_store"

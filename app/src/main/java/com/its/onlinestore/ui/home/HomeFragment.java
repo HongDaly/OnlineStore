@@ -5,26 +5,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.QuerySnapshot;
 import com.its.onlinestore.R;
 import com.its.onlinestore.adapter.CategoryAdapter;
+import com.its.onlinestore.adapter.ImageViewPagerAdapter;
 import com.its.onlinestore.adapter.ProductAdapter;
 import com.its.onlinestore.helper.FirebaseHelper;
 import com.its.onlinestore.model.Category;
+import com.its.onlinestore.model.Event;
 import com.its.onlinestore.model.Product;
 
 import java.util.ArrayList;
@@ -36,7 +35,10 @@ public class HomeFragment extends Fragment {
     private ArrayList<Category> categories = new ArrayList<>();
     private RecyclerView rcProductList;
     private ProductAdapter productAdapter;
+    private ViewPager vpEvent;
+    private ImageViewPagerAdapter adapter;
 
+    private ArrayList<Product> products = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         rcCategory = root.findViewById(R.id.fh_rc_category);
         rcProductList = root.findViewById(R.id.fh_rc_product_list);
+        vpEvent = root.findViewById(R.id.fh_vp_event);
 
         FirebaseHelper.getCategories().addOnSuccessListener(
                 new OnSuccessListener<QuerySnapshot>() {
@@ -63,10 +66,11 @@ public class HomeFragment extends Fragment {
         );
 
 
-
+        initEvent();
         initProductList();
 
         return root;
+
 
     }
 
@@ -93,6 +97,34 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+
+
+
+    private void initEvent(){
+        FirebaseHelper.getEvents().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<String> eventsUrl = new ArrayList<>();
+                if(queryDocumentSnapshots != null){
+                    for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                        Event event = snapshot.toObject(Event.class);
+                        if (event != null) {
+                            eventsUrl.add(event.getImageUrl());
+                        }
+                    }
+                    adapter = new ImageViewPagerAdapter(getContext(),eventsUrl);
+                    vpEvent.setAdapter(adapter);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
             }
         });
     }

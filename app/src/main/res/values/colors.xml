@@ -6,4 +6,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteSmoke">#f4f4f4</color>
     <color name="colorGrayLight">#f0f0f0</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

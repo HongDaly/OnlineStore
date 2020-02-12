@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,9 +25,11 @@ import com.its.onlinestore.R;
 import com.its.onlinestore.model.Product;
 import com.its.onlinestore.model.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class FirebaseHelper {
 
@@ -119,4 +122,20 @@ public class FirebaseHelper {
     public static Task<QuerySnapshot> getProductImages(String productId){
         return database.collection("feature_image").whereEqualTo("product_id",productId).get();
     }
+
+// get Related Product
+
+//    public static Task<QuerySnapshot> getRelatedProduct(){
+
+//        database.collection("product")
+//                .whereEqualTo()
+//    }
+
+
+//   get Event
+    public static Task<QuerySnapshot> getEvents(){
+        return database.collection("event").get();
+    }
+
+
 }

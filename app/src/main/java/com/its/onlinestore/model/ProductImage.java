@@ -1,6 +1,8 @@
 package com.its.onlinestore.model;
 
-public class ProductImage {
+import java.io.Serializable;
+
+public class ProductImage implements Serializable {
     private String product_id;
     private String image_url;
 
