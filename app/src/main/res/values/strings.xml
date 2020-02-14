@@ -61,5 +61,6 @@
     <string name="review">Review</string>
     <string name="this_feature_is_not_available_yet">This feature is not available yet!</string>
     <string name="related_product">Related Product</string>
+    <string name="msg_item_not_found">Oop! Item not found!</string>
 
 </resources>

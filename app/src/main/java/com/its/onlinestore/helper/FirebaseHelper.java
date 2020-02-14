@@ -138,4 +138,13 @@ public class FirebaseHelper {
     }
 
 
+//  search
+    public static Task<QuerySnapshot> search(){
+        return database
+                .collection("product")
+                .get();
+    }
+
+
+
 }
