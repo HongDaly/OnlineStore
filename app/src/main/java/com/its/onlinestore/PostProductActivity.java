@@ -172,6 +172,7 @@ public class PostProductActivity extends AppCompatActivity implements View.OnCli
 
 
     private void openGallery(){
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_PICK);
         intent.setType("image/*");

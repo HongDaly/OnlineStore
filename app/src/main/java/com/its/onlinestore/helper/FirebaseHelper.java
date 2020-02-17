@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
@@ -18,10 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.its.onlinestore.R;
+import com.its.onlinestore.model.Contact;
 import com.its.onlinestore.model.Product;
 import com.its.onlinestore.model.User;
 
@@ -144,7 +147,48 @@ public class FirebaseHelper {
                 .collection("product")
                 .get();
     }
+// add contact
 
+    private static Task<Uri> uploadImageContact(Uri uri){
+        String name = String.valueOf(System.currentTimeMillis());
+        String ext = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+        final StorageReference reference =  storage.getReference("contact/"+name+"."+ext);
+
+        Task<UploadTask.TaskSnapshot> uploadTask = reference.putFile(uri);
+        return uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    return null;
+                }
+                return reference.getDownloadUrl();
+            }
+        });
+    }
+    public  static  Task<Void> updateContact(final Contact contact, Uri uri){
+        if(uri != null){
+            uploadImageContact(uri)
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            contact.setImageUrl(uri.toString());
+                            Map<String, String> docData = new HashMap<>();
+                            docData.put("imageUrl",uri.toString());
+                            database.collection("contact")
+                                    .document(contact.getId())
+                                    .set(docData, SetOptions.merge());
+                        }
+                    });
+        }
+        contact.setId(contact.getUser_id());
+        return  database.collection("contact").document(contact.getId()).set(contact,SetOptions.merge());
+
+    }
+//    get contact
+
+    public static Task<DocumentSnapshot> getContact(String userId){
+        return database.collection("contact").document(userId).get();
+    }
 
 
 }

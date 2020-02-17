@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,7 +35,7 @@ public class SearchFragment extends Fragment {
     private ProgressBar pbLoading;
     private TextView tvNoItem;
     private ProductAdapter productAdapter;
-    ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
 
     public SearchFragment() {
         // Required empty public constructor
