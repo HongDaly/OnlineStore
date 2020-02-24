@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.its.onlinestore.R;
+import com.its.onlinestore.model.Category;
 import com.its.onlinestore.model.Contact;
 import com.its.onlinestore.model.Product;
 import com.its.onlinestore.model.User;
@@ -185,10 +186,16 @@ public class FirebaseHelper {
 
     }
 //    get contact
-
     public static Task<DocumentSnapshot> getContact(String userId){
         return database.collection("contact").document(userId).get();
     }
 
+//
+    public  static Task<QuerySnapshot> getProductByCategory(Category category){
+        return  database
+                .collection("product")
+                .whereArrayContainsAny("categories",category.getSub_category())
+                .get();
+    }
 
 }

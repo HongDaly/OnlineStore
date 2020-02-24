@@ -106,6 +106,72 @@
             android:id="@+id/api_cg_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/contact_seller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/api_iv_store_profile"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_home"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <TextView
+                    android:id="@+id/api_tv_store_name"
+                    android:gravity="center_vertical"
+                    android:text="@string/store"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="15dp"
+                    android:src="@drawable/ic_call"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <TextView
+                    android:id="@+id/api_tv_store_phone"
+                    android:gravity="center_vertical"
+                    android:text="@string/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:tint="@color/colorPrimaryDark"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_location"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <TextView
+                    android:id="@+id/api_tv_store_address"
+                    android:gravity="center_vertical"
+                    android:text="@string/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </LinearLayout>
+
         <TextView
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"

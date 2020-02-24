@@ -1,6 +1,8 @@
 package com.its.onlinestore.ui.home;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ import com.its.onlinestore.model.Event;
 import com.its.onlinestore.model.Product;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
@@ -37,6 +41,7 @@ public class HomeFragment extends Fragment {
     private ProductAdapter productAdapter;
     private ViewPager vpEvent;
     private ImageViewPagerAdapter adapter;
+    private int page = 0;
 
     private ArrayList<Product> products = new ArrayList<>();
 
@@ -119,6 +124,7 @@ public class HomeFragment extends Fragment {
                     }
                     adapter = new ImageViewPagerAdapter(getContext(),eventsUrl);
                     vpEvent.setAdapter(adapter);
+                    eventViewPagerAutoAnimation();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -127,5 +133,19 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(),"Something went wrong!",Toast.LENGTH_LONG).show();;
             }
         });
+    }
+
+    private void eventViewPagerAutoAnimation(){
+        final Runnable mUpdateResults = new Runnable() {
+            public void run() {
+                int numPages = vpEvent.getAdapter().getCount();
+                if(page > numPages) page = 0;
+                vpEvent.setCurrentItem(page);
+                page ++;
+
+            }
+        };
+
+        mUpdateResults.run();
     }
 }

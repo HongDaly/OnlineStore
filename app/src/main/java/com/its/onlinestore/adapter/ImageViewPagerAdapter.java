@@ -45,9 +45,7 @@ public class ImageViewPagerAdapter extends PagerAdapter {
                 );
         imageView.setLayoutParams(layoutParams);
         Glide.with(context).load(imageUrl.get(position)).into(imageView);
-
         container.addView(imageView);
-
         return imageView;
     }
 

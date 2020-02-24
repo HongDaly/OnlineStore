@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CateProductActivity"></activity>
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".ProductInfoActivity"></activity>
+            android:name=".ProductInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PostProductActivity"
             android:theme="@style/AppTheme.NoActionBar" />
